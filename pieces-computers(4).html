@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pieces Computers &amp; Engineering Services | Enugu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0FA958; --green-dark:#0B7C40; --navy:#141E52; --navy-2:#1C2A6E;
+  --red:#E31E24; --amber:#F2A93B; --paper:#F7F4EA; --paper-2:#EFEADA;
+  --ink:#191919; --ink-soft:#4A4A46; --line:rgba(20,30,82,0.16);
+  --shadow:0 18px 40px rgba(20,30,82,0.14);
+  --ff-display:'Anton', sans-serif; --ff-body:'Work Sans', sans-serif; --ff-mono:'JetBrains Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--ff-body); background:var(--paper); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+img{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+.container{max-width:1180px; margin:0 auto; padding:0 24px;}
+::selection{background:var(--green); color:#fff;}
+
+.halftone{position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(circle, rgba(20,30,82,0.10) 1.4px, transparent 1.4px); background-size:15px 15px; opacity:.5;}
+.halftone.light{background-image:radial-gradient(circle, rgba(255,255,255,0.16) 1.4px, transparent 1.4px);}
+
+/* ---------- TOPBAR ---------- */
+.topbar{background:var(--navy); color:#EDEBDD; font-family:var(--ff-mono); font-size:11.5px; letter-spacing:.03em;}
+.topbar .container{display:flex; justify-content:space-between; align-items:center; padding:7px 24px; flex-wrap:wrap; gap:6px;}
+.topbar a{opacity:.92; transition:opacity .2s;}
+.topbar a:hover{opacity:1; color:var(--amber);}
+.topbar .tb-left span{margin-right:18px;}
+.topbar .tb-left span:last-child{margin-right:0;}
+
+/* ---------- NAV ---------- */
+header.site{position:sticky; top:0; z-index:500; background:var(--paper); border-bottom:3px solid var(--navy);}
+nav.main{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
+.brand{display:flex; align-items:center; gap:12px;}
+.brand-mark{width:52px; height:52px; border-radius:50%; background:conic-gradient(from 220deg, var(--green), var(--green-dark) 40%, var(--navy) 70%, var(--green) 100%); display:flex; align-items:center; justify-content:center; border:3px solid var(--navy); position:relative; flex-shrink:0;}
+.brand-mark::after{content:''; position:absolute; inset:4px; border:1px dashed rgba(255,255,255,.55); border-radius:50%;}
+.brand-mark span{font-family:var(--ff-display); color:#fff; font-size:16px; letter-spacing:.02em; position:relative; z-index:2;}
+.brand-name{display:flex; flex-direction:column; line-height:1.15;}
+.brand-name b{font-family:var(--ff-display); font-size:16px; letter-spacing:.02em; color:var(--navy);}
+.brand-name em{font-style:normal; font-family:var(--ff-mono); font-size:10px; letter-spacing:.08em; color:var(--green-dark); text-transform:uppercase;}
+.nav-links{display:flex; align-items:center; gap:6px;}
+.nav-links a{font-family:var(--ff-mono); font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; padding:10px 14px; border-radius:3px; color:var(--navy); position:relative; transition:color .2s;}
+.nav-links a::after{content:''; position:absolute; left:14px; right:14px; bottom:6px; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .25s ease;}
+.nav-links a:hover, .nav-links a.active{color:var(--red);}
+.nav-links a:hover::after, .nav-links a.active::after{transform:scaleX(1);}
+.nav-cta{background:var(--red); color:#fff !important; padding:11px 20px !important; border-radius:3px; font-weight:700; box-shadow:0 6px 16px rgba(227,30,36,.35);}
+.nav-cta::after{display:none;}
+.nav-cta:hover{background:#c9151b; color:#fff !important;}
+.burger{display:none; flex-direction:column; gap:5px; background:none; border:none; padding:8px;}
+.burger span{width:26px; height:3px; background:var(--navy); border-radius:2px; transition:.3s;}
+@media (max-width:900px){
+  .nav-links{position:fixed; top:0; right:-100%; height:100vh; width:78%; max-width:340px; background:var(--navy); flex-direction:column; align-items:flex-start; padding:100px 28px 40px; transition:right .35s ease; z-index:600; gap:2px;}
+  .nav-links.open{right:0;}
+  .nav-links a{color:#EDEBDD; width:100%; padding:14px 8px; font-size:14px;}
+  .nav-links a::after{display:none;}
+  .nav-links a.active{color:var(--amber);}
+  .nav-cta{margin-top:14px; text-align:center;}
+  .burger{display:flex; z-index:650;}
+  .burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+  .nav-scrim{position:fixed; inset:0; background:rgba(10,14,40,.5); z-index:550; opacity:0; pointer-events:none; transition:opacity .3s;}
+  .nav-scrim.open{opacity:1; pointer-events:auto;}
+}
+
+/* ---------- PAGE / ROUTES ---------- */
+.page{display:none; animation:pageIn .5s ease both;}
+.page.active{display:block;}
+@keyframes pageIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-flex; align-items:center; gap:8px; font-family:var(--ff-mono); font-weight:600; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; padding:14px 26px; border-radius:3px; border:2px solid transparent; transition:transform .2s ease, box-shadow .2s ease, background .2s;}
+.btn:active{transform:translateY(1px);}
+.btn-primary{background:var(--red); color:#fff; box-shadow:0 10px 24px rgba(227,30,36,.32);}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(227,30,36,.4);}
+.btn-outline{border-color:var(--navy); color:var(--navy); background:transparent;}
+.btn-outline:hover{background:var(--navy); color:#fff; transform:translateY(-2px);}
+.btn-ghost-light{border-color:rgba(255,255,255,.6); color:#fff;}
+.btn-ghost-light:hover{background:#fff; color:var(--navy);}
+.btn-green{background:var(--green); color:#fff; box-shadow:0 10px 24px rgba(15,169,88,.32);}
+.btn-green:hover{transform:translateY(-2px); background:var(--green-dark);}
+
+/* ---------- HERO ---------- */
+.hero{position:relative; background:var(--navy); color:#fff; overflow:hidden; padding:96px 0 74px;}
+.hero::before{content:''; position:absolute; inset:0; background:linear-gradient(120deg, rgba(15,169,88,.28), transparent 45%), linear-gradient(300deg, rgba(227,30,36,.16), transparent 40%);}
+.hero-grid{position:relative; z-index:2; display:grid; grid-template-columns:1.2fr .8fr; gap:50px; align-items:center;}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; font-family:var(--ff-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); border:1px solid rgba(242,169,59,.5); padding:7px 14px; border-radius:20px; margin-bottom:22px;}
+.eyebrow::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(15,169,88,.3);}
+h1.hero-title{font-family:var(--ff-display); font-size:clamp(36px,6vw,64px); line-height:1.04; letter-spacing:.01em; text-transform:uppercase;}
+h1.hero-title .accent{color:var(--green);}
+.hero-sub{font-size:17px; color:#D8D9EA; max-width:540px; margin:22px 0 34px;}
+.hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+.trust-row{display:flex; gap:22px; flex-wrap:wrap; margin-top:34px;}
+.trust-item{display:flex; align-items:center; gap:9px; font-family:var(--ff-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:#C8CAE0;}
+.trust-item .ti-dot{width:7px; height:7px; border-radius:50%; background:var(--green);}
+
+.docket{position:relative; background:var(--paper); color:var(--ink); border-radius:6px; padding:26px 24px 22px; box-shadow:var(--shadow); transform:rotate(2deg);}
+.docket::before, .docket::after{content:''; position:absolute; width:22px; height:22px; background:var(--navy); border-radius:50%; top:50%; transform:translateY(-50%);}
+.docket::before{left:-11px;} .docket::after{right:-11px;}
+.docket-head{display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px dashed var(--line); padding-bottom:10px; margin-bottom:14px;}
+.docket-head b{font-family:var(--ff-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--green-dark);}
+.docket-head span{font-family:var(--ff-mono); font-size:11px; color:var(--ink-soft);}
+.docket-row{display:flex; justify-content:space-between; font-size:13.5px; padding:7px 0; border-bottom:1px dotted var(--line);}
+.docket-row:last-of-type{border-bottom:none;}
+.docket-row b{color:var(--navy);}
+.docket-foot{margin-top:14px; text-align:center; font-family:var(--ff-mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-soft); text-transform:uppercase;}
+
+/* ---------- SECTION GENERIC ---------- */
+section{padding:88px 0;}
+section.page{padding:0;}
+.section-head{max-width:640px; margin-bottom:52px;}
+.kicker{font-family:var(--ff-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+.kicker::before{content:''; width:28px; height:2px; background:var(--red);}
+h2.section-title{font-family:var(--ff-display); font-size:clamp(26px,4vw,40px); text-transform:uppercase; color:var(--navy); line-height:1.08;}
+.section-desc{color:var(--ink-soft); font-size:15.5px; margin-top:14px; max-width:580px;}
+
+.reveal{opacity:1; transform:none;}
+
+/* ---------- PILLARS ---------- */
+.pillars{display:grid; grid-template-columns:repeat(5,1fr); gap:18px;}
+.pillar{background:#fff; border:1.5px solid var(--line); border-radius:6px; padding:24px 18px; position:relative; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease, border-color .3s;}
+.pillar:hover{transform:translateY(-8px); box-shadow:var(--shadow); border-color:var(--green);}
+.pillar .num{font-family:var(--ff-mono); font-size:10.5px; color:var(--red); letter-spacing:.08em;}
+.pillar h3{font-family:var(--ff-display); font-size:16.5px; text-transform:uppercase; color:var(--navy); margin:10px 0 8px; letter-spacing:.01em;}
+.pillar p{font-size:12.8px; color:var(--ink-soft);}
+.pillar-icon{width:40px; height:40px; border-radius:50%; background:var(--paper-2); display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:17px;}
+
+/* ---------- STATS STRIP ---------- */
+.stats{background:var(--navy); color:#fff; position:relative; overflow:hidden;}
+.stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center; position:relative; z-index:2;}
+.stat b{font-family:var(--ff-display); font-size:clamp(30px,4vw,46px); color:var(--green); display:block;}
+.stat span{font-family:var(--ff-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#C8CAE0;}
+
+/* ---------- WORK / GALLERY CARDS ---------- */
+.grid-3col{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.work-card{border-radius:6px; overflow:hidden; position:relative; box-shadow:var(--shadow); background:#fff; transition:transform .35s ease;}
+.work-card:hover{transform:translateY(-6px);}
+.work-card .img-wrap{aspect-ratio:4/3; overflow:hidden; position:relative;}
+.work-card img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease;}
+.work-card:hover img{transform:scale(1.08);}
+.work-card .cap{padding:16px 18px;}
+.work-card .cap b{font-family:var(--ff-display); font-size:15px; color:var(--navy); text-transform:uppercase; letter-spacing:.02em;}
+.work-card .cap span{display:block; font-family:var(--ff-mono); font-size:10.5px; color:var(--red); text-transform:uppercase; letter-spacing:.06em; margin-top:4px;}
+.badge-corner{position:absolute; top:12px; left:12px; background:rgba(20,30,82,.85); color:#fff; font-family:var(--ff-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; padding:5px 10px; border-radius:3px; z-index:2;}
+
+/* ---------- TICKET SERVICE CARDS ---------- */
+.svc-cat{margin-bottom:56px;}
+.svc-cat-head{display:flex; align-items:baseline; gap:14px; margin-bottom:22px; flex-wrap:wrap;}
+.svc-cat-head h3{font-family:var(--ff-display); font-size:23px; color:var(--navy); text-transform:uppercase;}
+.svc-cat-head span{font-family:var(--ff-mono); font-size:11px; color:var(--red); letter-spacing:.08em; text-transform:uppercase;}
+.svc-cat-head::after{content:''; flex:1; height:1.5px; background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px);}
+.ticket-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+.ticket{position:relative; background:#fff; border:1.5px dashed rgba(20,30,82,.35); border-radius:4px; padding:22px 20px 20px; transition:transform .3s ease, box-shadow .3s ease, border-color .3s;}
+.ticket:hover{transform:translateY(-5px) rotate(-.6deg); box-shadow:var(--shadow); border-color:var(--green);}
+.ticket::before, .ticket::after{content:''; position:absolute; width:16px; height:16px; background:var(--paper); border-radius:50%; top:50%; transform:translateY(-50%);}
+.ticket::before{left:-8px;} .ticket::after{right:-8px;}
+.ticket .t-code{font-family:var(--ff-mono); font-size:10px; color:var(--red); letter-spacing:.06em;}
+.ticket h4{font-family:var(--ff-display); font-size:16px; color:var(--navy); text-transform:uppercase; margin:8px 0; letter-spacing:.01em;}
+.ticket p{font-size:12.8px; color:var(--ink-soft);}
+.ticket .t-foot{margin-top:14px; padding-top:10px; border-top:1px dotted var(--line); display:flex; justify-content:space-between; align-items:center;}
+.ticket .t-foot span{font-family:var(--ff-mono); font-size:10px; color:var(--ink-soft); text-transform:uppercase;}
+.ticket .t-foot button{background:none; border:none; font-family:var(--ff-mono); font-size:11px; color:var(--green-dark); font-weight:700; letter-spacing:.04em; text-transform:uppercase;}
+.ticket .t-foot button:hover{color:var(--red);}
+
+/* ---------- ABOUT ---------- */
+.about-wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
+.about-photo{position:relative; border-radius:8px; overflow:hidden; box-shadow:var(--shadow);}
+.about-photo img{width:100%; aspect-ratio:4/5; object-fit:cover;}
+.stamp{position:absolute; bottom:-26px; right:-20px; width:118px; height:118px; border-radius:50%; background:var(--paper); border:2.5px solid var(--red); display:flex; align-items:center; justify-content:center; transform:rotate(-14deg); box-shadow:0 10px 20px rgba(0,0,0,.2);}
+.stamp .stamp-inner{width:92px; height:92px; border-radius:50%; border:1.5px dashed var(--red); display:flex; align-items:center; justify-content:center; text-align:center;}
+.stamp b{font-family:var(--ff-mono); font-size:9.5px; letter-spacing:.05em; color:var(--red); text-transform:uppercase; line-height:1.3;}
+.value-list{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px;}
+.value-item{display:flex; gap:12px; align-items:flex-start;}
+.value-item .dot{width:30px; height:30px; border-radius:50%; background:var(--green); color:#fff; font-family:var(--ff-mono); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.value-item p{font-size:13.5px; color:var(--ink-soft);}
+.value-item b{color:var(--navy); font-size:14px;}
+
+/* ---------- TESTIMONIALS ---------- */
+.testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.testi{background:#fff; border-radius:6px; padding:26px 22px; box-shadow:0 8px 20px rgba(20,30,82,.08); position:relative;}
+.testi .quote-mark{font-family:var(--ff-display); font-size:44px; color:var(--paper-2); line-height:1; position:absolute; top:14px; right:18px;}
+.testi p{font-size:14px; color:var(--ink-soft); margin-bottom:18px; position:relative; z-index:1;}
+.testi-who{display:flex; align-items:center; gap:12px;}
+.testi-who .av{width:40px; height:40px; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--ff-mono); font-weight:700; font-size:13px;}
+.testi-who b{display:block; font-size:13.5px; color:var(--navy);}
+.testi-who span{font-family:var(--ff-mono); font-size:10.5px; color:var(--red); text-transform:uppercase;}
+
+/* ---------- CTA BANNER ---------- */
+.cta-band{background:linear-gradient(120deg, var(--green-dark), var(--green)); color:#fff; position:relative; overflow:hidden;}
+.cta-inner{display:flex; justify-content:space-between; align-items:center; gap:30px; flex-wrap:wrap; position:relative; z-index:2;}
+.cta-inner h2{font-family:var(--ff-display); font-size:clamp(24px,3.4vw,36px); text-transform:uppercase; max-width:520px;}
+.cta-inner p{font-family:var(--ff-mono); font-size:12px; letter-spacing:.04em; margin-top:10px; opacity:.9;}
+
+/* ---------- CONTACT ---------- */
+.contact-wrap{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
+.info-card{background:var(--navy); color:#fff; border-radius:8px; padding:34px; position:relative; overflow:hidden;}
+.info-row{display:flex; gap:14px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.14); align-items:flex-start;}
+.info-row:last-child{border-bottom:none;}
+.info-row .ic{width:38px; height:38px; border-radius:50%; background:rgba(15,169,88,.22); border:1px solid var(--green); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:15px;}
+.info-row b{display:block; font-family:var(--ff-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); margin-bottom:4px;}
+.info-row span, .info-row a{font-size:14.5px; color:#EDEBDD;}
+.form-card{background:#fff; border-radius:8px; padding:34px; box-shadow:var(--shadow);}
+.form-row{margin-bottom:18px;}
+.form-row label{display:block; font-family:var(--ff-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--navy); margin-bottom:7px;}
+.form-row input, .form-row select, .form-row textarea{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:4px; font-family:var(--ff-body); font-size:14px; background:var(--paper); transition:border-color .2s;}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus{outline:none; border-color:var(--green);}
+.form-row textarea{resize:vertical; min-height:90px;}
+.form-row select optgroup{font-family:var(--ff-mono); font-style:normal; color:var(--green-dark);}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy); color:#C8CAE0; padding-top:64px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.12);}
+.foot-brand p{font-size:13.5px; margin-top:14px; max-width:280px; color:#A9ABCC;}
+.foot-col h5{font-family:var(--ff-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber); margin-bottom:16px;}
+.foot-col a{display:block; font-size:13.5px; padding:6px 0; color:#C8CAE0; transition:color .2s;}
+.foot-col a:hover{color:var(--green);}
+.foot-bottom{display:flex; justify-content:space-between; align-items:center; padding:22px 0; font-family:var(--ff-mono); font-size:11px; color:#8688AC; flex-wrap:wrap; gap:10px;}
+.foot-bottom span b{color:var(--green);}
+
+/* ---------- LIGHTBOX ---------- */
+.lightbox{position:fixed; inset:0; background:rgba(10,14,32,.92); z-index:900; display:none; align-items:center; justify-content:center; padding:40px;}
+.lightbox.open{display:flex; animation:fadeIn .25s ease;}
+.lightbox img{max-width:90vw; max-height:82vh; border-radius:6px; box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.lightbox-close{position:absolute; top:24px; right:30px; color:#fff; font-size:28px; background:none; border:none;}
+@keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
+
+/* ---------- MODAL (gate) ---------- */
+.modal-overlay{position:fixed; inset:0; background:rgba(15,20,45,.62); backdrop-filter:blur(3px); z-index:1000; display:none; align-items:center; justify-content:center; padding:20px;}
+.modal-overlay.open{display:flex; animation:fadeIn .25s ease;}
+.modal-box{background:var(--paper); border-radius:10px; max-width:440px; width:100%; padding:38px 32px 30px; position:relative; box-shadow:0 30px 70px rgba(0,0,0,.4); text-align:center; transform:scale(.9); animation:popIn .35s cubic-bezier(.2,1.4,.4,1) forwards; border-top:5px solid var(--green);}
+@keyframes popIn{to{transform:scale(1);}}
+.modal-stamp{width:64px; height:64px; border-radius:50%; border:2.5px dashed var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:26px; color:var(--green);}
+.modal-box h3{font-family:var(--ff-display); font-size:20px; text-transform:uppercase; color:var(--navy); margin-bottom:12px; letter-spacing:.01em;}
+.modal-box p{font-size:14px; color:var(--ink-soft); margin-bottom:24px;}
+.modal-box a.btn{width:100%; justify-content:center;}
+.modal-close{position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; color:var(--ink-soft);}
+
+.hairline-divider{height:1px; background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 16px); margin:0 0 60px;}
+.mini-map{border-radius:8px; overflow:hidden; box-shadow:var(--shadow); aspect-ratio:16/10;}
+.mini-map img{width:100%; height:100%; object-fit:cover;}
+
+.page-hero{background:var(--navy); color:#fff; padding:60px 0 54px; position:relative; overflow:hidden;}
+.page-hero .container{position:relative; z-index:2;}
+.page-hero .kicker{color:var(--amber);}
+.page-hero .kicker::before{background:var(--amber);}
+.page-hero h1{font-family:var(--ff-display); font-size:clamp(28px,5vw,48px); text-transform:uppercase;}
+.page-hero p{color:#C8CAE0; margin-top:12px; max-width:560px; font-size:15px;}
+.crumbs{font-family:var(--ff-mono); font-size:11px; color:#9FA1C6; margin-bottom:16px; letter-spacing:.05em; text-transform:uppercase;}
+.crumbs b{color:var(--green);}
+
+.filter-bar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:38px;}
+.filter-btn{font-family:var(--ff-mono); font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; padding:9px 16px; border-radius:20px; border:1.5px solid var(--line); background:#fff; color:var(--navy); transition:.2s;}
+.filter-btn:hover{border-color:var(--green);}
+.filter-btn.active{background:var(--navy); border-color:var(--navy); color:#fff;}
+
+.fab-wa{position:fixed; bottom:24px; right:24px; width:58px; height:58px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 26px rgba(37,211,102,.5); z-index:400; font-size:26px; color:#fff; border:none; animation:pulse 2.4s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5);} 70%{box-shadow:0 0 0 16px rgba(37,211,102,0);} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
+
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;}
+  .docket{max-width:420px; margin-top:20px;}
+  .pillars{grid-template-columns:repeat(2,1fr);}
+  .stats-grid{grid-template-columns:repeat(2,1fr); gap:34px;}
+  .grid-3col, .ticket-grid, .testi-grid{grid-template-columns:1fr 1fr;}
+  .about-wrap, .contact-wrap{grid-template-columns:1fr; gap:36px;}
+  .foot-grid{grid-template-columns:1fr 1fr; gap:30px;}
+}
+@media (max-width:640px){
+  nav.main{padding:12px 18px;}
+  .nav-links{display:none;}
+  .nav-links.open{display:flex;}
+  .pillars, .grid-3col, .ticket-grid, .testi-grid, .foot-grid{grid-template-columns:1fr;}
+  .value-list{grid-template-columns:1fr;}
+  section{padding:60px 0;}
+  .hero{padding:70px 0 50px;}
+  .cta-inner{flex-direction:column; align-items:flex-start; text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="tb-left">
+      <span>📍 76/90 Nike Road, Abakpa Nike, Enugu</span>
+      <span>✉️ piecescomputers@gmail.com</span>
+    </div>
+    <div class="tb-right"><a href="tel:07036760637">📞 0703 676 0637</a></div>
+  </div>
+</div>
+
+<header class="site">
+  <nav class="main container">
+    <a href="#home" class="brand">
+      <div class="brand-mark"><span>PC</span></div>
+      <div class="brand-name"><b>PIECES COMPUTERS</b><em>&amp; Engineering Services</em></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" data-route="home">Home</a>
+      <a href="#about" data-route="about">About</a>
+      <a href="#services" data-route="services">Services</a>
+      <a href="#gallery" data-route="gallery">Gallery</a>
+      <a href="#contact" data-route="contact">Contact</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
+
+<main>
+<!-- ============ HOME ============ -->
+<section id="page-home" class="page">
+
+  <div class="hero">
+    <div class="halftone"></div>
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">General Computer &amp; Business Centre · Est. Abakpa Nike, Enugu</div>
+        <h1 class="hero-title">All the pieces,<br>one <span class="accent">address.</span></h1>
+        <p class="hero-sub">Computer sales, repairs &amp; training, print &amp; design, custom branding, registration &amp; document services, and construction &amp; electrical work — all handled in-house, all logged like a proper job docket.</p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary" data-route-link="services">View All Services</a>
+          <button class="btn btn-ghost-light" data-gate>Request a Quote</button>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><span class="ti-dot"></span>17 Years Serving Enugu</div>
+          <div class="trust-item"><span class="ti-dot"></span>In-House Technicians</div>
+          <div class="trust-item"><span class="ti-dot"></span>Walk-In &amp; On-Site Service</div>
+        </div>
+      </div>
+      <div class="docket">
+        <div class="docket-head"><b>Job Docket</b><span>№ PC-2026</span></div>
+        <div class="docket-row"><span>Service</span><b>System Format + Install</b></div>
+        <div class="docket-row"><span>Category</span><b>Computer &amp; IT</b></div>
+        <div class="docket-row"><span>Turnaround</span><b>Same Day</b></div>
+        <div class="docket-row"><span>Status</span><b style="color:var(--green-dark)">✔ Completed</b></div>
+        <div class="docket-foot">— Pieces Computers &amp; Engineering —</div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">What We Do</div>
+        <h2 class="section-title">Five service desks. One counter.</h2>
+        <p class="section-desc">A general computer &amp; engineering business centre — walk in with any job, and it gets routed to the right desk, tracked start to finish.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal"><div class="pillar-icon">💻</div><div class="num">01</div><h3>Computer &amp; IT</h3><p>Sales, repairs, formatting, training, website design &amp; hosting.</p></div>
+        <div class="pillar reveal"><div class="pillar-icon">🖨️</div><div class="num">02</div><h3>Print &amp; Design</h3><p>Posters, banners, calendars, invitation cards &amp; brochures.</p></div>
+        <div class="pillar reveal"><div class="pillar-icon">🧢</div><div class="num">03</div><h3>Custom Branding</h3><p>Caps, polos, T-shirts, jerseys, bags, badges &amp; pens.</p></div>
+        <div class="pillar reveal"><div class="pillar-icon">📝</div><div class="num">04</div><h3>Registration &amp; Docs</h3><p>NYSC, WAEC/NECO, JAMB &amp; CAC registration support.</p></div>
+        <div class="pillar reveal"><div class="pillar-icon">⚡</div><div class="num">05</div><h3>Construction &amp; Electrical</h3><p>Billboard stands, wiring, inverter &amp; solar installs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="halftone light"></div>
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat reveal"><b data-count="17">0</b><span>Years On Nike Road</span></div>
+        <div class="stat reveal"><b data-count="4200">0</b><span>Jobs Completed</span></div>
+        <div class="stat reveal"><b data-count="28">0</b><span>Services Offered</span></div>
+        <div class="stat reveal"><b data-count="24">0</b><span>Hr Avg. Turnaround</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Recent Work</div>
+        <h2 class="section-title">Fresh off the counter.</h2>
+      </div>
+      <div class="grid-3col">
+        <div class="work-card reveal"><div class="img-wrap"><span class="badge-corner">IT</span><img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=900&q=80" alt="Computer training class"></div><div class="cap"><b>Computer Training</b><span>New Intake, Weekly Classes</span></div></div>
+        <div class="work-card reveal"><div class="img-wrap"><span class="badge-corner">Print</span><img src="https://images.unsplash.com/photo-1616628182504-0857cee8fee2?auto=format&fit=crop&w=900&q=80" alt="Poster printing"></div><div class="cap"><b>Event Poster Run</b><span>Design &amp; Large Format Print</span></div></div>
+        <div class="work-card reveal"><div class="img-wrap"><span class="badge-corner">Electrical</span><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=80" alt="Solar panel installation"></div><div class="cap"><b>Solar Backup Install</b><span>Inverter &amp; Panel Setup</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">From The Counter</div>
+        <h2 class="section-title">What clients say after pickup.</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi reveal"><div class="quote-mark">"</div><p>Brought my laptop in for formatting on a Monday morning, was ready before closing. Straightforward and honest pricing.</p><div class="testi-who"><div class="av">CN</div><div><b>Chidinma N.</b><span>Small Business Owner</span></div></div></div>
+        <div class="testi reveal"><div class="quote-mark">"</div><p>They installed our solar inverter and handled the office network wiring the same week. One team, two very different jobs, both done properly.</p><div class="testi-who"><div class="av">OE</div><div><b>Obinna E.</b><span>Shop Owner, Abakpa</span></div></div></div>
+        <div class="testi reveal"><div class="quote-mark">"</div><p>Did my NYSC and JAMB registration here two years running — no wahala, no long queue, and they double-check every entry before submitting.</p><div class="testi-who"><div class="av">SB</div><div><b>Sister Blessing</b><span>School Administrator</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="halftone light"></div>
+    <div class="container cta-inner">
+      <div><h2>Got a job in mind?</h2><p>WALK IN · CALL · WHATSAPP — 76/90 NIKE ROAD, ABAKPA NIKE, ENUGU</p></div>
+      <button class="btn btn-primary" data-gate>Start Your Job Ticket</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="page-about" class="page">
+  <div class="page-hero">
+    <div class="halftone light"></div>
+    <div class="container">
+      <div class="crumbs">Home / <b>About</b></div>
+      <div class="kicker">Our Story</div>
+      <h1>Built job by job on Nike Road.</h1>
+      <p>A general computer &amp; business centre that grew into a full engineering outfit — because Enugu needed both, from one trusted address.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container about-wrap">
+      <div class="about-photo reveal">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80" alt="Technician at work">
+        <div class="stamp"><div class="stamp-inner"><b>Since 2009<br>Enugu, NG</b></div></div>
+      </div>
+      <div class="reveal">
+        <div class="kicker">Who We Are</div>
+        <h2 class="section-title">Every service, one job docket.</h2>
+        <p class="section-desc">Pieces Computers &amp; Engineering Services started as a small computer sales-and-repair counter on Nike Road and grew alongside the businesses, schools, churches and individuals who kept walking in with new requests — a WAEC registration one week, a branded jersey order the next, a faulty inverter the week after. Rather than turn work away, we built out the capacity to handle it all: an IT desk, a print &amp; design bench, a branding press, a registration/documentation counter, and a field crew for electrical and construction jobs.</p>
+        <p class="section-desc">Today, one visit to our office covers computer sales &amp; repair, design &amp; print, apparel branding, exam and government registrations, and on-site electrical or solar installation — logged and tracked like a proper job docket, from intake to completion.</p>
+        <div class="value-list">
+          <div class="value-item"><div class="dot">✓</div><div><b>Same-Counter Service</b><p>No referrals to a third party — our own team handles it start to finish.</p></div></div>
+          <div class="value-item"><div class="dot">✓</div><div><b>Honest, Upfront Pricing</b><p>Clear quotes before we start, no surprise charges at pickup.</p></div></div>
+          <div class="value-item"><div class="dot">✓</div><div><b>Trained Technicians</b><p>In-house computer training doubles as staff development for our own crew.</p></div></div>
+          <div class="value-item"><div class="dot">✓</div><div><b>Field-Ready</b><p>Electrical, solar and construction jobs handled on-site across Enugu.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--paper-2)">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Inside The Workshop</div>
+        <h2 class="section-title">Where the jobs get made.</h2>
+      </div>
+      <div class="grid-3col">
+        <div class="work-card reveal"><div class="img-wrap"><img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80" alt="Computer service desk"></div><div class="cap"><b>IT Service Desk</b><span>Sales, Repair &amp; Training</span></div></div>
+        <div class="work-card reveal"><div class="img-wrap"><img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&w=800&q=80" alt="Print press"></div><div class="cap"><b>Print Floor</b><span>Large Format &amp; Digital</span></div></div>
+        <div class="work-card reveal"><div class="img-wrap"><img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80" alt="Electrical panel work"></div><div class="cap"><b>Field Crew</b><span>Electrical &amp; Solar</span></div></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="page-services" class="page">
+  <div class="page-hero">
+    <div class="halftone light"></div>
+    <div class="container">
+      <div class="crumbs">Home / <b>Services</b></div>
+      <div class="kicker">Full Service List</div>
+      <h1>Every job, ticketed and priced fair.</h1>
+      <p>A general computer &amp; engineering business centre — five service desks, one counter. Browse the full list below.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+
+      <div class="svc-cat">
+        <div class="svc-cat-head"><h3>Computer &amp; IT Services</h3><span>Sales, Repair &amp; Training</span></div>
+        <div class="ticket-grid">
+          <div class="ticket reveal"><span class="t-code">JOB-001</span><h4>Computer Sales &amp; Accessories</h4><p>New and quality-checked desktops, laptops and accessories.</p><div class="t-foot"><span>Warranty on select items</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-002</span><h4>System Formatting &amp; Installation</h4><p>PC formatting, software installation and system troubleshooting.</p><div class="t-foot"><span>Walk-in or on-site</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-003</span><h4>Website Design &amp; Hosting</h4><p>Business websites designed, built and hosted, with ongoing support.</p><div class="t-foot"><span>Consultation first</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-004</span><h4>Computer Training</h4><p>Hands-on beginner to intermediate computer classes at our office.</p><div class="t-foot"><span>New intake monthly</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-005</span><h4>Internet &amp; Browsing Services</h4><p>Printing from email/cloud, research, and general internet assistance.</p><div class="t-foot"><span>Walk-in</span><button data-gate>Request →</button></div></div>
+        </div>
+      </div>
+
+      <div class="svc-cat">
+        <div class="svc-cat-head"><h3>Print &amp; Design</h3><span>Design + Output</span></div>
+        <div class="ticket-grid">
+          <div class="ticket reveal"><span class="t-code">JOB-101</span><h4>Posters &amp; Flex Banners</h4><p>Full-colour design and large-format print for events, shops and campaigns.</p><div class="t-foot"><span>Counter pricing</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-102</span><h4>Calendars</h4><p>Custom desk and wall calendars, branded to your business or church.</p><div class="t-foot"><span>Bulk discounts</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-103</span><h4>Invitation Cards</h4><p>Weddings, dedications, anniversaries — designed and printed on request.</p><div class="t-foot"><span>Rush jobs welcome</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-104</span><h4>Jotters &amp; Exercise Books</h4><p>School-branded jotters and exercise books, printed to spec.</p><div class="t-foot"><span>School term orders</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-105</span><h4>Brochures &amp; Programmes</h4><p>Church programmes, event brochures and company literature.</p><div class="t-foot"><span>Fast turnaround</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-106</span><h4>Complimentary Cards</h4><p>Business cards designed and printed for professionals and traders.</p><div class="t-foot"><span>Same-week ready</span><button data-gate>Request →</button></div></div>
+        </div>
+      </div>
+
+      <div class="svc-cat">
+        <div class="svc-cat-head"><h3>Customized Branding</h3><span>Apparel &amp; Merch</span></div>
+        <div class="ticket-grid">
+          <div class="ticket reveal"><span class="t-code">JOB-201</span><h4>Caps &amp; Polo Shirts</h4><p>Embroidered or printed to your logo, for staff or event wear.</p><div class="t-foot"><span>Min. order applies</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-202</span><h4>T-Shirts &amp; Jerseys</h4><p>Team kits, church jerseys and campaign T-shirts, any quantity.</p><div class="t-foot"><span>Colour matching</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-203</span><h4>Bags &amp; Nylon</h4><p>Branded bags and nylon packaging for retail and events.</p><div class="t-foot"><span>Bulk pricing</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-204</span><h4>Ties, Plates &amp; Badges</h4><p>School and staff ties, award plates and ID/name badges.</p><div class="t-foot"><span>Corporate &amp; school</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-205</span><h4>Branded Pens</h4><p>Custom-printed pens for giveaways, offices and schools.</p><div class="t-foot"><span>Fast reorder</span><button data-gate>Request →</button></div></div>
+        </div>
+      </div>
+
+      <div class="svc-cat">
+        <div class="svc-cat-head"><h3>Registration &amp; Document Services</h3><span>Exams &amp; Government</span></div>
+        <div class="ticket-grid">
+          <div class="ticket reveal"><span class="t-code">JOB-301</span><h4>NYSC Registration &amp; Support</h4><p>Mobilization registration, biodata correction guidance and print-outs.</p><div class="t-foot"><span>Seasonal — call ahead</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-302</span><h4>WAEC / NECO Registration</h4><p>Exam registration, result checking and scratch card guidance.</p><div class="t-foot"><span>Termly intake</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-303</span><h4>JAMB / UTME Registration</h4><p>UTME registration, profile correction support and result checking.</p><div class="t-foot"><span>Seasonal — call ahead</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-304</span><h4>CAC Business Registration</h4><p>Business name and company registration support and document filing.</p><div class="t-foot"><span>Consultation first</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-305</span><h4>Online Job &amp; CBT Exam Registration</h4><p>Recruitment portals, CBT exam slips and online application support.</p><div class="t-foot"><span>Walk-in</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-306</span><h4>Scanning &amp; Document Editing</h4><p>Document scanning, retyping, editing and formatting to spec.</p><div class="t-foot"><span>Walk-in</span><button data-gate>Request →</button></div></div>
+        </div>
+      </div>
+
+      <div class="svc-cat">
+        <div class="svc-cat-head"><h3>Construction &amp; Electrical</h3><span>Field Crew</span></div>
+        <div class="ticket-grid">
+          <div class="ticket reveal"><span class="t-code">JOB-401</span><h4>Billboard Stand Construction</h4><p>Design, construction and installation of billboard stands.</p><div class="t-foot"><span>Site visit required</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-402</span><h4>Fuel-Less Generator Builds</h4><p>Custom fuel-less generator setups for homes and small offices.</p><div class="t-foot"><span>Consultation first</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-403</span><h4>Electrical Installation &amp; Maintenance</h4><p>Wiring, fittings and maintenance for homes, shops and offices.</p><div class="t-foot"><span>Licensed technicians</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-404</span><h4>Inverter / Solar Panel Installation</h4><p>Backup power systems sized and installed for your property.</p><div class="t-foot"><span>Free site assessment</span><button data-gate>Request →</button></div></div>
+        </div>
+      </div>
+
+      <div class="svc-cat">
+        <div class="svc-cat-head"><h3>Everyday Counter</h3><span>Walk-In Services</span></div>
+        <div class="ticket-grid">
+          <div class="ticket reveal"><span class="t-code">JOB-501</span><h4>Photocopy &amp; Typing</h4><p>Document photocopying and typing services while you wait.</p><div class="t-foot"><span>Walk-in</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-502</span><h4>Lamination &amp; Binding</h4><p>Document lamination and spiral/comb binding for reports and files.</p><div class="t-foot"><span>Walk-in</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-503</span><h4>Passport Photographs</h4><p>Wait-and-take passport photographs, printed on the spot.</p><div class="t-foot"><span>5-minute service</span><button data-gate>Request →</button></div></div>
+          <div class="ticket reveal"><span class="t-code">JOB-504</span><h4>Recharge Card, Airtime &amp; Data</h4><p>All-network airtime, data bundles and electricity bill payments.</p><div class="t-foot"><span>Walk-in</span><button data-gate>Request →</button></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="page-gallery" class="page">
+  <div class="page-hero">
+    <div class="halftone light"></div>
+    <div class="container">
+      <div class="crumbs">Home / <b>Gallery</b></div>
+      <div class="kicker">Portfolio</div>
+      <h1>A look at completed job tickets.</h1>
+      <p>Browse recent computer, print, branding and field work. Tap any image to view larger.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="it">Computer &amp; IT</button>
+        <button class="filter-btn" data-filter="print">Print &amp; Design</button>
+        <button class="filter-btn" data-filter="brand">Branding</button>
+        <button class="filter-btn" data-filter="field">Construction &amp; Electrical</button>
+      </div>
+      <div class="grid-3col" id="galleryGrid">
+        <div class="work-card reveal" data-cat="it"><div class="img-wrap"><span class="badge-corner">IT</span><img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80" alt="Computer training class"></div><div class="cap"><b>Computer Training</b><span>Weekly Classes</span></div></div>
+        <div class="work-card reveal" data-cat="it"><div class="img-wrap"><span class="badge-corner">IT</span><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Website design work"></div><div class="cap"><b>Website Build</b><span>Design &amp; Hosting</span></div></div>
+        <div class="work-card reveal" data-cat="print"><div class="img-wrap"><span class="badge-corner">Print</span><img src="https://images.unsplash.com/photo-1616628182504-0857cee8fee2?auto=format&fit=crop&w=800&q=80" alt="Poster print run"></div><div class="cap"><b>Poster Print Run</b><span>Large Format</span></div></div>
+        <div class="work-card reveal" data-cat="print"><div class="img-wrap"><span class="badge-corner">Print</span><img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&w=800&q=80" alt="Printing press machine"></div><div class="cap"><b>Press Floor</b><span>Digital &amp; Offset</span></div></div>
+        <div class="work-card reveal" data-cat="brand"><div class="img-wrap"><span class="badge-corner">Branding</span><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Branded T-shirts"></div><div class="cap"><b>Branded T-Shirts</b><span>Custom Apparel</span></div></div>
+        <div class="work-card reveal" data-cat="brand"><div class="img-wrap"><span class="badge-corner">Branding</span><img src="https://images.unsplash.com/photo-1596496181848-3091d4878b24?auto=format&fit=crop&w=800&q=80" alt="Cap embroidery press"></div><div class="cap"><b>Cap Press Setup</b><span>Heat-Press Branding</span></div></div>
+        <div class="work-card reveal" data-cat="field"><div class="img-wrap"><span class="badge-corner">Field</span><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80" alt="Solar panel install"></div><div class="cap"><b>Solar Panel Install</b><span>Backup Power</span></div></div>
+        <div class="work-card reveal" data-cat="field"><div class="img-wrap"><span class="badge-corner">Field</span><img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=800&q=80" alt="Electrical installation"></div><div class="cap"><b>Electrical Wiring</b><span>Installation &amp; Maintenance</span></div></div>
+        <div class="work-card reveal" data-cat="print"><div class="img-wrap"><span class="badge-corner">Print</span><img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?auto=format&fit=crop&w=800&q=80" alt="Invitation card design"></div><div class="cap"><b>Invitation Cards</b><span>Design &amp; Print</span></div></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="halftone light"></div>
+    <div class="container">
+      <div class="crumbs">Home / <b>Contact</b></div>
+      <div class="kicker">Get In Touch</div>
+      <h1>Start your job ticket.</h1>
+      <p>Walk in, call, or send your job details below — we'll come back with pricing and turnaround.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container contact-wrap">
+      <div class="info-card reveal">
+        <div class="halftone light" style="opacity:.12"></div>
+        <div class="info-row"><div class="ic">📍</div><div><b>Office Address</b><span>76/90 Nike Road, Abakpa Nike, Enugu</span></div></div>
+        <div class="info-row"><div class="ic">📞</div><div><b>Phone</b><a href="tel:07036760637">0703 676 0637</a></div></div>
+        <div class="info-row"><div class="ic">💬</div><div><b>WhatsApp</b><a href="#" data-gate>0807 403 0758</a></div></div>
+        <div class="info-row"><div class="ic">✉️</div><div><b>Email</b><a href="mailto:piecescomputers@gmail.com">piecescomputers@gmail.com</a></div></div>
+        <div class="info-row"><div class="ic">🕐</div><div><b>Opening Hours</b><span>Mon – Sat · 8:00 AM – 6:00 PM</span></div></div>
+        <div class="mini-map" style="margin-top:22px;">
+          <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Enugu street area">
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <div class="kicker">Job Request</div>
+        <h2 class="section-title" style="font-size:22px; margin-bottom:20px;">Tell us the job</h2>
+        <form id="contactForm">
+          <div class="form-row"><label>Full Name</label><input type="text" placeholder="Your name" required></div>
+          <div class="form-row"><label>Phone Number</label><input type="tel" placeholder="e.g. 0803 000 0000" required></div>
+          <div class="form-row"><label>Service Needed</label>
+            <select required>
+              <option value="">Select a service</option>
+              <optgroup label="Computer &amp; IT Services">
+                <option>Computer Sales &amp; Accessories</option>
+                <option>System Formatting &amp; Installation</option>
+                <option>Website Design &amp; Hosting</option>
+                <option>Computer Training</option>
+                <option>Internet &amp; Browsing Services</option>
+              </optgroup>
+              <optgroup label="Print &amp; Design">
+                <option>Posters / Flex Banners</option>
+                <option>Calendars</option>
+                <option>Invitation Cards</option>
+                <option>Jotters / Exercise Books</option>
+                <option>Brochures / Programmes</option>
+                <option>Complimentary Cards</option>
+              </optgroup>
+              <optgroup label="Customized Branding">
+                <option>Caps / Polo Shirts</option>
+                <option>T-Shirts / Jerseys</option>
+                <option>Bags / Nylon</option>
+                <option>Ties / Plates / Badges</option>
+                <option>Branded Pens</option>
+              </optgroup>
+              <optgroup label="Registration &amp; Document Services">
+                <option>NYSC Registration &amp; Support</option>
+                <option>WAEC / NECO Registration</option>
+                <option>JAMB / UTME Registration</option>
+                <option>CAC Business Registration</option>
+                <option>Online Job &amp; CBT Exam Registration</option>
+                <option>Scanning &amp; Document Editing</option>
+              </optgroup>
+              <optgroup label="Construction &amp; Electrical">
+                <option>Billboard Stand Construction</option>
+                <option>Fuel-Less Generator Build</option>
+                <option>Electrical Installation &amp; Maintenance</option>
+                <option>Inverter / Solar Panel Installation</option>
+              </optgroup>
+              <optgroup label="Everyday Counter">
+                <option>Photocopy &amp; Typing</option>
+                <option>Lamination &amp; Binding</option>
+                <option>Passport Photographs</option>
+                <option>Recharge Card / Airtime / Data</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-row"><label>Job Details</label><textarea placeholder="Describe what you need done..." required></textarea></div>
+          <button type="submit" class="btn btn-green" style="width:100%; justify-content:center;">Submit Job Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="brand-mark"><span>PC</span></div>
+          <div class="brand-name"><b style="color:#fff;">PIECES COMPUTERS</b><em style="color:var(--amber);">&amp; Engineering Services</em></div>
+        </div>
+        <p>A general computer &amp; business centre in Enugu — computer sales &amp; IT, print &amp; design, custom branding, registration &amp; document services, and construction &amp; electrical work, all under one counter.</p>
+      </div>
+      <div class="foot-col"><h5>Explore</h5>
+        <a href="#home" data-route-link="home">Home</a>
+        <a href="#about" data-route-link="about">About Us</a>
+        <a href="#services" data-route-link="services">Services</a>
+        <a href="#gallery" data-route-link="gallery">Gallery</a>
+      </div>
+      <div class="foot-col"><h5>Services</h5>
+        <a href="#services" data-route-link="services">Computer &amp; IT</a>
+        <a href="#services" data-route-link="services">Print &amp; Design</a>
+        <a href="#services" data-route-link="services">Registration &amp; Docs</a>
+        <a href="#services" data-route-link="services">Construction &amp; Electrical</a>
+      </div>
+      <div class="foot-col"><h5>Contact</h5>
+        <a href="tel:07036760637">0703 676 0637</a>
+        <a href="#" data-gate>0807 403 0758 (WhatsApp)</a>
+        <a href="mailto:piecescomputers@gmail.com">piecescomputers@gmail.com</a>
+        <a href="#contact" data-route-link="contact">76/90 Nike Road, Abakpa Nike</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Pieces Computers &amp; Engineering Services. All rights reserved.</span>
+      <span>Sample site by <b>Lumidexx</b></span>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightboxClose">✕</button><img id="lightboxImg" src="" alt="Enlarged view"></div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-stamp">🔒</div>
+    <h3>Full Site Feature</h3>
+    <p>This feature is part of the full professional website. Contact <strong>info@lumidexx.com</strong> to activate your complete branded site.</p>
+    <a href="mailto:info@lumidexx.com" class="btn btn-primary">Email info@lumidexx.com</a>
+  </div>
+</div>
+
+<button class="fab-wa" id="fabWa" aria-label="WhatsApp">💬</button>
+
+<script>
+const routes = ['home','about','services','gallery','contact'];
+function setRoute(route){
+  if(!routes.includes(route)) route = 'home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+route).classList.add('active');
+  document.querySelectorAll('.nav-links a[data-route]').forEach(a=>{ a.classList.toggle('active', a.dataset.route === route); });
+  window.scrollTo(0,0);
+  closeMobileNav();
+  observeReveals();
+}
+function routeFromHash(){ const h = window.location.hash.replace('#','') || 'home'; setRoute(h); }
+window.addEventListener('hashchange', routeFromHash);
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+const navScrim = document.getElementById('navScrim');
+function closeMobileNav(){ burger.classList.remove('open'); navLinks.classList.remove('open'); navScrim.classList.remove('open'); }
+burger.addEventListener('click', ()=>{ burger.classList.toggle('open'); navLinks.classList.toggle('open'); navScrim.classList.toggle('open'); });
+navScrim.addEventListener('click', closeMobileNav);
+
+const modalOverlay = document.getElementById('modalOverlay');
+document.getElementById('modalClose').addEventListener('click', ()=>modalOverlay.classList.remove('open'));
+modalOverlay.addEventListener('click', e=>{ if(e.target === modalOverlay) modalOverlay.classList.remove('open'); });
+document.addEventListener('click', e=>{ const gateEl = e.target.closest('[data-gate]'); if(gateEl){ e.preventDefault(); modalOverlay.classList.add('open'); } });
+document.getElementById('contactForm').addEventListener('submit', e=>{ e.preventDefault(); modalOverlay.classList.add('open'); });
+document.getElementById('fabWa').addEventListener('click', ()=> modalOverlay.classList.add('open'));
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape') modalOverlay.classList.remove('open'); });
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+document.addEventListener('click', e=>{ const card = e.target.closest('.work-card img'); if(card){ lightboxImg.src = card.src; lightbox.classList.add('open'); } });
+document.getElementById('lightboxClose').addEventListener('click', ()=>lightbox.classList.remove('open'));
+lightbox.addEventListener('click', e=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#galleryGrid .work-card').forEach(card=>{
+      card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+    });
+  });
+});
+
+function observeReveals(){ /* content is visible by default now — no-op, kept for compatibility */ }
+
+let countersStarted = false;
+function startCounters(){
+  if(countersStarted) return; countersStarted = true;
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target = parseInt(el.dataset.count,10);
+    let cur = 0; const step = Math.max(1, Math.round(target/60));
+    const iv = setInterval(()=>{ cur += step; if(cur >= target){ cur = target; clearInterval(iv); } el.textContent = cur.toLocaleString(); }, 25);
+  });
+}
+const statsSection = document.querySelector('.stats');
+if(statsSection){
+  const so = new IntersectionObserver(entries=>{ entries.forEach(en=>{ if(en.isIntersecting){ startCounters(); so.disconnect(); } }); }, {threshold:0.3});
+  so.observe(statsSection);
+}
+/* safety net: guarantee counters play even if the observer never fires (e.g. full-page screenshot tools) */
+setTimeout(startCounters, 1200);
+
+/* run the router last, now that every DOM ref and listener above exists */
+routeFromHash();
+</script>
+</body>
+</html>
